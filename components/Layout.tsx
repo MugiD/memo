@@ -1,5 +1,6 @@
 import Head from "next/head";
-import { Box, Container } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+import Navbar from "./Navbar";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -13,9 +14,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           content="Memo. Todo app that will blow your mind"
         />
       </Head>
-      <Container >
-        {children}
-      </Container>
+      <Navbar />
+      {children}
     </Box>
   );
 };

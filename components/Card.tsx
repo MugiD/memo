@@ -3,23 +3,29 @@ import { useState, useEffect } from "react";
 import { app, database } from "../utils/firebaseConfig";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 
-const Add = () => {
-  const [todo, setTodo] = useState<string>("");
-  const dbInstance = collection(database, "tasks");
-  const [taskArray, setTaskArray] = useState<Array<any>>([]);
+const Card = ({
+  collectionName,
+  title,
+}: {
+  collectionName: string;
+  title: string;
+}) => {
+  const dbInstance = collection(database, collectionName);
+  const [todo, setTodo] = useState("");
+  const [tasks, setTasks] = useState<Todo[]>([]);
 
-  const AddTask = () => {
+  const addTask = () => {
     addDoc(dbInstance, {
-      todo: todo,
+      todo,
     }).then(() => {
-      setTodo("");
-      getTasks()
+      setTodo("Done");
+      getTasks();
     });
   };
 
   const getTasks = () => {
     getDocs(dbInstance).then((data: any) => {
-      setTaskArray(
+      setTasks(
         data.docs.map((item: any) => {
           return { ...item.data(), id: item.id };
         })
@@ -29,30 +35,33 @@ const Add = () => {
 
   useEffect(() => {
     getTasks();
+    // eslint-disable-next-line
   }, []);
 
   return (
-    <Box>
-      <Heading>Memo</Heading>
+    <Box bg="colors.darkblue" p={4} rounded="xl">
+      <Heading>{title}</Heading>
+      <Box p={6}>
+        {tasks.map((tasks) => {
+          return (
+            <Box key={tasks.id}>
+              <Text>{tasks.todo}</Text>
+            </Box>
+          );
+        })}
+      </Box>
       <Flex>
         <Input
           borderRightRadius="none"
           placeholder="Enter Todo"
           onChange={(e) => setTodo(e.target.value)}
         />
-        <Button borderLeftRadius="none" onClick={AddTask}>
+        <Button borderLeftRadius="none" onClick={addTask}>
           Add
         </Button>
       </Flex>
-      {taskArray.map((tasks) => {
-        return (
-          <Box key={tasks.id}>
-            <Text>{tasks.todo}</Text>
-          </Box>
-        );
-      })}
     </Box>
   );
 };
 
-export default Add;
+export default Card;
