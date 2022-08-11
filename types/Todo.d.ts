@@ -1,4 +1,4 @@
 interface Todo {
-  id: string;
-  todo: string;
+  id?: string;
+  todo?: string;
 }
