@@ -1,13 +1,10 @@
 import type { AppProps } from "next/app";
 import { extendTheme } from "@chakra-ui/react";
 import Layout from "../components/Layout";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, useColorModeValue } from "@chakra-ui/react";
 
 const colors = {
   colors: {
-    white: "#fff",
-    black: "#000814",
-    darkblue: "#14213d",
     blue: "#003566",
     darkyellow: "#ffc300",
     yellow: "#ffd60a",
@@ -15,14 +12,7 @@ const colors = {
 };
 
 const theme = extendTheme({
-  colors,
-  styles: {
-    global: {
-      "html, body": {
-        backgroundColor: "#000814",
-      },
-    },
-  },
+  colors
 });
 
 function MyApp({ Component, pageProps }: AppProps) {

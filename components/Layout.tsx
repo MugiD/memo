@@ -1,10 +1,12 @@
 import Head from "next/head";
-import { Box } from "@chakra-ui/react";
+import { Box, useColorModeValue } from "@chakra-ui/react";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+
   return (
-    <Box as="main">
+    <Box as="main" bg={useColorModeValue('#fff', '#0E1E27')}>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="author" content="Bek Slambek" />
@@ -16,6 +18,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       </Head>
       <Navbar />
       {children}
+      <Footer />
     </Box>
   );
 };
