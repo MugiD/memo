@@ -56,7 +56,7 @@ const Card = ({
   return (
     <Box
       bg={useColorModeValue("#f5f1ed", "#16262e")}
-      rounded="md"
+      rounded="xl"
       height="400px"
       maxH="max-content"
       position="relative"

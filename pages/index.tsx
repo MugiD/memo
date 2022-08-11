@@ -1,16 +1,16 @@
 import type { NextPage } from "next";
+import { useState } from "react";
 import { Box } from "@chakra-ui/react";
 import Card from "../components/Card";
 import SingleCard from "../components/SingleCard";
-import { useState } from "react";
 import Auth from "../components/Auth";
 
 const Home: NextPage = () => {
-  // get certain task
-  const [ID, setID] = useState("");
+  const [id, setId] = useState("");
   const [colName, setColName] = useState("");
-  const getSingleTodo = (id: any, collectionName: string) => {
-    setID(id);
+
+  const getSingleTodo = (id: string, collectionName: string) => {
+    setId(id);
     setColName(collectionName);
   };
 
@@ -44,7 +44,7 @@ const Home: NextPage = () => {
         collectionName="NomNot"
         getSingleTodo={getSingleTodo}
       />
-      <SingleCard ID={ID} colName={colName} />
+      <SingleCard id={id} colName={colName} />
     </Box>
   );
 };
